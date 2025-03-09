@@ -126,6 +126,7 @@ namespace TheatreSeating
             //a comment
         }
 
+        //Railyn Wingfield w10103698
         //Assign to Team 2 Member
         private void ButtonCancelReservation(object sender, EventArgs e)
         {
