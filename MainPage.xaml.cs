@@ -118,6 +118,8 @@ namespace TheatreSeating
             }
         }
 
+        //Carleigh Smith (W10111544) Made Repository
+
         //Assign to Team 1 Member
         private void ButtonReserveRange(object sender, EventArgs e)
         {
