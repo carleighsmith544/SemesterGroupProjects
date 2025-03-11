@@ -139,6 +139,7 @@ namespace TheatreSeating
 
         }
 
+        //Emily Lane w10185062
         //Assign to Team 4 Member
         private void ButtonResetSeatingChart(object sender, EventArgs e)
         {
