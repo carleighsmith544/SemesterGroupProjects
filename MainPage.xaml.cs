@@ -158,13 +158,55 @@ var seat = await DisplayPromptAsync("Enter Seat Number", "Enter seat number to c
         await DisplayAlert("Error", "Seat was not found.", "Ok");
     }
         }
-
+        // Joseph White w10195902
         //Assign to Team 3 Member
-        private void ButtonCancelReservationRange(object sender, EventArgs e)
-        {
+       private async void ButtonCancelReservationRange(object sender, EventArgs e)
+{
+    
+    var startSeat = await DisplayPromptAsync("Enter Start Seat", "Enter the starting seat number: ");
+    var endSeat = await DisplayPromptAsync("Enter End Seat", "Enter the ending seat number: ");
+    
+    
+    if (startSeat != null && endSeat != null)
+    {
+        List<SeatingUnit> seatsToCancel = new List<SeatingUnit>();
 
+        for (int i = 0; i < seatingChart.GetLength(0); i++)
+        {
+            for (int j = 0; j < seatingChart.GetLength(1); j++)
+            {
+                
+                if (string.Compare(seatingChart[i, j].Name, startSeat) >= 0 &&
+                    string.Compare(seatingChart[i, j].Name, endSeat) <= 0)
+                {
+                    seatsToCancel.Add(seatingChart[i, j]);
+                }
+            }
         }
 
+        
+        if (seatsToCancel.Count > 0)
+        {
+            foreach (var seat in seatsToCancel)
+            {
+                if (seat.Reserved)
+                {
+                    seat.Reserved = false;
+                }
+            }
+
+            await DisplayAlert("Successfully Canceled", "Reservations in the specified range are canceled.", "Ok");
+            RefreshSeating();
+        }
+        else
+        {
+            await DisplayAlert("Error", "No seats found in the specified range.", "Ok");
+        }
+    }
+}
+
+
+            
         //Emily Lane w10185062
         //Assign to Team 4 Member
         private void ButtonResetSeatingChart(object sender, EventArgs e)
