@@ -130,7 +130,33 @@ namespace TheatreSeating
         //Assign to Team 2 Member
         private void ButtonCancelReservation(object sender, EventArgs e)
         {
+var seat = await DisplayPromptAsync("Enter Seat Number", "Enter seat number to cancel reservation: ");
 
+    if (seat != null)
+    {
+        for (int i = 0; i < seatingChart.GetLength(0); i++)
+        {
+            for (int j = 0; j < seatingChart.GetLength(1); j++)
+            {
+                if (seatingChart[i, j].Name == seat)
+                {
+                    if (seatingChart[i, j].Reserved)
+                    {
+                        seatingChart[i, j].Reserved = false;
+                        await DisplayAlert("Successfully Canceled", "Your reservation was canceled successfully!", "Ok");
+                    }
+                    else
+                    {
+                        await DisplayAlert("Error", "This seat is not reserved.", "Ok");
+                    }
+                    RefreshSeating();
+                    return;
+                }
+            }
+        }
+
+        await DisplayAlert("Error", "Seat was not found.", "Ok");
+    }
         }
 
         //Assign to Team 3 Member
