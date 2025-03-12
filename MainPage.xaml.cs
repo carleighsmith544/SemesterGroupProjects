@@ -123,10 +123,66 @@ namespace TheatreSeating
         //Assign to Team 1 Member
         private void ButtonReserveRange(object sender, EventArgs e)
         {
-            
+             {     
+     var startSeat = await DisplayPromptAsync("Enter Start Seat", "Enter the start seat number (ex. A1): ");
+
+     var endSeat = await DisplayPromptAsync("Enter End Seat","Enter the end seat number (ex. A4): ");  
+     if (startSeat != null && endSeat != null)
+     {      char startRow = startSeat[0];
+
+         char endRow = endSeat[0];
+
+         if (startRow != endRow)
+         {
+               await DisplayAlert("Error", "Seats must be in the same row.", "Okay.");
+             return;
+         }
+         List<SeatingUnit> seatsToReserve = new List<SeatingUnit>();
+
+       
+         for (int i = 0; i < seatingChart.GetLength(0); i++)
+         {
+             for (int j = 0; j < seatingChart.GetLength(1); j++)
+             {
+                 
+                 if (string.Compare(seatingChart[i, j].Name, startSeat) >= 0 &&
+                     string.Compare(seatingChart[i, j].Name, endSeat) <= 0)
+                 {      seatsToReserve.Add(seatingChart[i, j]); 
+                 }
+             }
+         }   
+         bool canReserve = true;
+         foreach (var seat in seatsToReserve)
+         {
+             if (seat.Reserved)
+             {
+                 canReserve = false; 
+                 break;
+             }
+         }     
+         if (canReserve)
+         {
+             foreach (var seat in seatsToReserve)
+             {
+                 seat.Reserved = true;
+             }
+             
+             await DisplayAlert("Seat Reserved.", "The seats have been reserved.", "Okay");
+             RefreshSeating();
+         }
+         else
+         {
+             await DisplayAlert("Error", "One or more seats are already reserved.", "Okay");
+         }
+     }
+     else
+     {   
+         await DisplayAlert("Error", "Please enter both start and end seat numbers.", "Okay");
+     }
+ }
         }
 
-        //Railyn Wingfield w10103698
+     //Railyn Wingfield w10103698
         //Assign to Team 2 Member
         private void ButtonCancelReservation(object sender, EventArgs e)
         {
