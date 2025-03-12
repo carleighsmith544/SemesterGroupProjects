@@ -119,11 +119,11 @@ namespace TheatreSeating
         }
 
         //Carleigh Smith (W10111544) Made Repository
-
+        //Kayla Pickering (W10105865) 
         //Assign to Team 1 Member
         private void ButtonReserveRange(object sender, EventArgs e)
         {
-            //a comment
+            
         }
 
         //Railyn Wingfield w10103698
