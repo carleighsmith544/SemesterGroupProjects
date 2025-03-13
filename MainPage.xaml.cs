@@ -267,11 +267,20 @@ namespace TheatreSeating
 
 
 
-        //Emily Lane w10185062
+        //Emily Lane w10185062 and Carleigh Smith w10111544
         //Assign to Team 4 Member
         private void ButtonResetSeatingChart(object sender, EventArgs e)
         {
+            for (int row = 0; row < seatingChart.GetLength(0); row++)
+            {
+                for (int column = 0; column < seatingChart.GetLength(1); column++)
+                {
+                    seatingChart[row, column].Reserved = false;
+                }
+            }
 
+            RefreshSeating();
+            DisplayAlert("Reset Complete", "All seating reservations have been cleared.", "OK");
         }
     }
 
