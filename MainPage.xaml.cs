@@ -1,4 +1,4 @@
-﻿using System.Collections.Specialized;
+using System.Collections.Specialized;
 using System.Reflection.Metadata;
 
 namespace TheatreSeating
@@ -118,151 +118,155 @@ namespace TheatreSeating
             }
         }
 
-        //Carleigh Smith (W10111544) Made Repository
+        //Carleigh Smith (W10111544) Made Repository and Project
+
+        
         //Kayla Pickering (W10105865) 
         //Assign to Team 1 Member
-        private void ButtonReserveRange(object sender, EventArgs e)
+        private async void ButtonReserveRange(object sender, EventArgs e)
         {
-             {     
-     var startSeat = await DisplayPromptAsync("Enter Start Seat", "Enter the start seat number (ex. A1): ");
-
-     var endSeat = await DisplayPromptAsync("Enter End Seat","Enter the end seat number (ex. A4): ");  
-     if (startSeat != null && endSeat != null)
-     {      char startRow = startSeat[0];
-
-         char endRow = endSeat[0];
-
-         if (startRow != endRow)
-         {
-               await DisplayAlert("Error", "Seats must be in the same row.", "Okay.");
-             return;
-         }
-         List<SeatingUnit> seatsToReserve = new List<SeatingUnit>();
-
-       
-         for (int i = 0; i < seatingChart.GetLength(0); i++)
-         {
-             for (int j = 0; j < seatingChart.GetLength(1); j++)
-             {
-                 
-                 if (string.Compare(seatingChart[i, j].Name, startSeat) >= 0 &&
-                     string.Compare(seatingChart[i, j].Name, endSeat) <= 0)
-                 {      seatsToReserve.Add(seatingChart[i, j]); 
-                 }
-             }
-         }   
-         bool canReserve = true;
-         foreach (var seat in seatsToReserve)
-         {
-             if (seat.Reserved)
-             {
-                 canReserve = false; 
-                 break;
-             }
-         }     
-         if (canReserve)
-         {
-             foreach (var seat in seatsToReserve)
-             {
-                 seat.Reserved = true;
-             }
-             
-             await DisplayAlert("Seat Reserved.", "The seats have been reserved.", "Okay");
-             RefreshSeating();
-         }
-         else
-         {
-             await DisplayAlert("Error", "One or more seats are already reserved.", "Okay");
-         }
-     }
-     else
-     {   
-         await DisplayAlert("Error", "Please enter both start and end seat numbers.", "Okay");
-     }
- }
-        }
-
-     //Railyn Wingfield w10103698
-        //Assign to Team 2 Member
-        private void ButtonCancelReservation(object sender, EventArgs e)
-        {
-var seat = await DisplayPromptAsync("Enter Seat Number", "Enter seat number to cancel reservation: ");
-
-    if (seat != null)
-    {
-        for (int i = 0; i < seatingChart.GetLength(0); i++)
-        {
-            for (int j = 0; j < seatingChart.GetLength(1); j++)
             {
-                if (seatingChart[i, j].Name == seat)
+                var startSeat = await DisplayPromptAsync("Enter Start Seat", "Enter the start seat number (ex. A1): ");
+
+                var endSeat = await DisplayPromptAsync("Enter End Seat", "Enter the end seat number (ex. A4): ");
+                if (startSeat != null && endSeat != null)
                 {
-                    if (seatingChart[i, j].Reserved)
+                    char startRow = startSeat[0];
+
+                    char endRow = endSeat[0];
+
+                    if (startRow != endRow)
                     {
-                        seatingChart[i, j].Reserved = false;
-                        await DisplayAlert("Successfully Canceled", "Your reservation was canceled successfully!", "Ok");
+                        await DisplayAlert("Error", "Seats must be in the same row.", "Okay.");
+                        return;
+                    }
+                    List<SeatingUnit> seatsToReserve = new List<SeatingUnit>();
+
+
+                    for (int i = 0; i < seatingChart.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < seatingChart.GetLength(1); j++)
+                        {
+
+                            if (string.Compare(seatingChart[i, j].Name, startSeat) >= 0 &&
+                                string.Compare(seatingChart[i, j].Name, endSeat) <= 0)
+                            {
+                                seatsToReserve.Add(seatingChart[i, j]);
+                            }
+                        }
+                    }
+                    bool canReserve = true;
+                    foreach (var seat in seatsToReserve)
+                    {
+                        if (seat.Reserved)
+                        {
+                            canReserve = false;
+                            break;
+                        }
+                    }
+                    if (canReserve)
+                    {
+                        foreach (var seat in seatsToReserve)
+                        {
+                            seat.Reserved = true;
+                        }
+
+                        await DisplayAlert("Seat Reserved.", "The seats have been reserved.", "Okay");
+                        RefreshSeating();
                     }
                     else
                     {
-                        await DisplayAlert("Error", "This seat is not reserved.", "Ok");
+                        await DisplayAlert("Error", "One or more seats are already reserved.", "Okay");
                     }
-                    RefreshSeating();
-                    return;
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Please enter both start and end seat numbers.", "Okay");
                 }
             }
         }
 
-        await DisplayAlert("Error", "Seat was not found.", "Ok");
-    }
+        //Railyn Wingfield w10103698
+        //Assign to Team 2 Member
+        private async void ButtonCancelReservation(object sender, EventArgs e)
+        {
+            var seat = await DisplayPromptAsync("Enter Seat Number", "Enter seat number to cancel reservation: ");
+
+            if (seat != null)
+            {
+                for (int i = 0; i < seatingChart.GetLength(0); i++)
+                {
+                    for (int j = 0; j < seatingChart.GetLength(1); j++)
+                    {
+                        if (seatingChart[i, j].Name == seat)
+                        {
+                            if (seatingChart[i, j].Reserved)
+                            {
+                                seatingChart[i, j].Reserved = false;
+                                await DisplayAlert("Successfully Canceled", "Your reservation was canceled successfully!", "Ok");
+                            }
+                            else
+                            {
+                                await DisplayAlert("Error", "This seat is not reserved.", "Ok");
+                            }
+                            RefreshSeating();
+                            return;
+                        }
+                    }
+                }
+
+                await DisplayAlert("Error", "Seat was not found.", "Ok");
+            }
         }
         // Joseph White w10195902
         //Assign to Team 3 Member
-       private async void ButtonCancelReservationRange(object sender, EventArgs e)
-{
-    
-    var startSeat = await DisplayPromptAsync("Enter Start Seat", "Enter the starting seat number: ");
-    var endSeat = await DisplayPromptAsync("Enter End Seat", "Enter the ending seat number: ");
-    
-    
-    if (startSeat != null && endSeat != null)
-    {
-        List<SeatingUnit> seatsToCancel = new List<SeatingUnit>();
-
-        for (int i = 0; i < seatingChart.GetLength(0); i++)
+        private async void ButtonCancelReservationRange(object sender, EventArgs e)
         {
-            for (int j = 0; j < seatingChart.GetLength(1); j++)
+
+            var startSeat = await DisplayPromptAsync("Enter Start Seat", "Enter the starting seat number: ");
+            var endSeat = await DisplayPromptAsync("Enter End Seat", "Enter the ending seat number: ");
+
+
+            if (startSeat != null && endSeat != null)
             {
-                
-                if (string.Compare(seatingChart[i, j].Name, startSeat) >= 0 &&
-                    string.Compare(seatingChart[i, j].Name, endSeat) <= 0)
+                List<SeatingUnit> seatsToCancel = new List<SeatingUnit>();
+
+                for (int i = 0; i < seatingChart.GetLength(0); i++)
                 {
-                    seatsToCancel.Add(seatingChart[i, j]);
+                    for (int j = 0; j < seatingChart.GetLength(1); j++)
+                    {
+
+                        if (string.Compare(seatingChart[i, j].Name, startSeat) >= 0 &&
+                            string.Compare(seatingChart[i, j].Name, endSeat) <= 0)
+                        {
+                            seatsToCancel.Add(seatingChart[i, j]);
+                        }
+                    }
+                }
+
+
+                if (seatsToCancel.Count > 0)
+                {
+                    foreach (var seat in seatsToCancel)
+                    {
+                        if (seat.Reserved)
+                        {
+                            seat.Reserved = false;
+                        }
+                    }
+
+                    await DisplayAlert("Successfully Canceled", "Reservations in the specified range are canceled.", "Ok");
+                    RefreshSeating();
+                }
+                else
+                {
+                    await DisplayAlert("Error", "No seats found in the specified range.", "Ok");
                 }
             }
         }
 
-        
-        if (seatsToCancel.Count > 0)
-        {
-            foreach (var seat in seatsToCancel)
-            {
-                if (seat.Reserved)
-                {
-                    seat.Reserved = false;
-                }
-            }
-
-            await DisplayAlert("Successfully Canceled", "Reservations in the specified range are canceled.", "Ok");
-            RefreshSeating();
-        }
-        else
-        {
-            await DisplayAlert("Error", "No seats found in the specified range.", "Ok");
-        }
-    }
-}
 
 
-            
         //Emily Lane w10185062
         //Assign to Team 4 Member
         private void ButtonResetSeatingChart(object sender, EventArgs e)
