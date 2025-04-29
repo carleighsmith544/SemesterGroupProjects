@@ -1,8 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SavorySweets.Project.Models;
 using SavorySweets.Project.Controllers;
 using System.Collections.ObjectModel;
@@ -11,22 +6,25 @@ namespace SavorySweets.Project.Views
 {
     public partial class MyRecipesPage : ContentPage
     {
-        private readonly RecipeController _recipeController;
-        private readonly UserController _userController;
-        private ObservableCollection<Recipe> _myRecipes;
+        private readonly RecipeController _recipeController;  
+        private readonly UserController _userController;      
+        private ObservableCollection<Recipe> _myRecipes;       
 
         public MyRecipesPage()
         {
             InitializeComponent();
-            _recipeController = new RecipeController(); 
+            _recipeController = new RecipeController();
             _userController = new UserController();
             LoadMyRecipes();
         }
+
+        // Loads the logged-in user's recipes into the collection view
         private void LoadMyRecipes()
         {
             var user = _userController.GetLoggedInUser();
             if (user == null)
             {
+                // If no user logged in, show error and navigate back
                 DisplayAlert("Access Denied", "You must be logged in to view your recipes.", "OK");
                 Navigation.PopAsync();
                 return;
@@ -36,11 +34,13 @@ namespace SavorySweets.Project.Views
             myRecipeCollection.ItemsSource = _myRecipes;
         }
 
+        // Navigates to the Add Recipe page
         private void OnAddRecipeClicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new AddOrEditRecipePage(null, _recipeController, _userController));
         }
 
+        // Navigates to the Edit Recipe page for the selected recipe
         private void OnEditRecipeClicked(object sender, EventArgs e)
         {
             if (sender is Button button && int.TryParse(button.CommandParameter.ToString(), out int id))
@@ -53,6 +53,7 @@ namespace SavorySweets.Project.Views
             }
         }
 
+        // Deletes the selected recipe after user confirmation
         private async void OnDeleteRecipeClicked(object sender, EventArgs e)
         {
             if (sender is Button button && int.TryParse(button.CommandParameter.ToString(), out int id))
@@ -61,10 +62,9 @@ namespace SavorySweets.Project.Views
                 if (confirm)
                 {
                     _recipeController.DeleteRecipe(id);
-                    LoadMyRecipes(); // Refresh
+                    LoadMyRecipes(); // Reload the list after deletion
                 }
             }
         }
     }
 }
-
