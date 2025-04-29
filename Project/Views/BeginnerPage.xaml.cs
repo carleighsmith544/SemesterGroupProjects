@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SavorySweets.Project.Controllers;
 
 namespace SavorySweets.Project.Views
 {
@@ -18,6 +12,7 @@ namespace SavorySweets.Project.Views
             _recipeController = new RecipeController();
             LoadBeginnerRecipes();
         }
+        //loads recipes that belong to the "Beginner" category
         private void LoadBeginnerRecipes()
         {
             var beginnerRecipes = _recipeController.Recipes
@@ -28,6 +23,7 @@ namespace SavorySweets.Project.Views
             beginnerRecipesCollection.ItemsSource = new ObservableCollection<RecipeDisplayView>(beginnerRecipes);
         }
 
+        //handles when the favorite icon is clicked to toggle favorite status
         private void OnToggleFavoriteClicked(object sender, EventArgs e)
         {
             if (sender is ImageButton button && button.CommandParameter is int id)
@@ -37,6 +33,7 @@ namespace SavorySweets.Project.Views
             }
         }
 
+        //handles when a recipe item is selected from the collection view
         private void OnRecipeSelected(object sender, SelectionChangedEventArgs e)
         {
             if (e.CurrentSelection.FirstOrDefault() is RecipeDisplayView selected)
