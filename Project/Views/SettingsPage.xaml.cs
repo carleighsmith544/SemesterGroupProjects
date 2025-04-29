@@ -1,4 +1,4 @@
-﻿using Microsoft.Maui.Storage;
+using Microsoft.Maui.Storage;
 using SavorySweets.Project.Controllers;
 using SavorySweets.Project.Models;
 
@@ -7,8 +7,8 @@ namespace SavorySweets.Project.Views;
 public partial class SettingsPage : ContentPage
 {
     private readonly UserController _userController;
-    private User? _currentUser;
-    private string _profileImagePath = "";
+    private User? _currentUser;                     
+    private string _profileImagePath = "";          
 
     public SettingsPage()
     {
@@ -17,6 +17,7 @@ public partial class SettingsPage : ContentPage
         LoadUserData();
     }
 
+    // Loads user data into the form fields
     private void LoadUserData()
     {
         _currentUser = _userController.GetLoggedInUser();
@@ -35,7 +36,6 @@ public partial class SettingsPage : ContentPage
         }
         else
         {
-            // No user is signed in — show default image and clear fields
             profileImage.Source = "default_profile.png";
             firstNameEntry.Text = "";
             lastNameEntry.Text = "";
@@ -44,6 +44,7 @@ public partial class SettingsPage : ContentPage
         }
     }
 
+    // Handles the user selecting a new profile picture
     private async void OnChangePhotoClicked(object sender, EventArgs e)
     {
         try
@@ -66,6 +67,7 @@ public partial class SettingsPage : ContentPage
         }
     }
 
+    // Handles saving updated settings to the database
     private async void OnSaveSettingsClicked(object sender, EventArgs e)
     {
         if (_currentUser == null)
