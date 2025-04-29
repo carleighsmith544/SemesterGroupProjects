@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SavorySweets.Project.Controllers;
+
 
 namespace SavorySweets.Project.Views
 {
@@ -18,6 +13,8 @@ namespace SavorySweets.Project.Views
             _recipeController = new RecipeController();
             LoadQuickRecipes();
         }
+
+        // Loads recipes categorized as "5-minute"
         private void LoadQuickRecipes()
         {
             var quick = _recipeController.Recipes
@@ -30,6 +27,7 @@ namespace SavorySweets.Project.Views
             quickRecipesCollection.ItemsSource = new ObservableCollection<RecipeDisplayView>(quick);
         }
 
+        //handles when the favorite icon is clicked to toggle favorite status
         private void OnToggleFavoriteClicked(object sender, EventArgs e)
         {
             if (sender is ImageButton button && button.CommandParameter is int id)
@@ -39,6 +37,7 @@ namespace SavorySweets.Project.Views
             }
         }
 
+        //handles when a quick recipe is selected from the CollectionView
         private void OnRecipeSelected(object sender, SelectionChangedEventArgs e)
         {
             if (e.CurrentSelection.FirstOrDefault() is RecipeDisplayView selected)
