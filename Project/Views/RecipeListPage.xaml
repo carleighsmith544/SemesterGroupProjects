@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:SavorySweets.Project.Views"
              x:Class="SavorySweets.Project.Views.RecipeListPage"
-             Title="All Recipes"
-             BackgroundColor="White">
+             Title="All Recipes">
 
     <ContentPage.Resources>
         <ResourceDictionary>
