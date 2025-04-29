@@ -1,4 +1,3 @@
-﻿using SavorySweets.Project.Models;
 using SavorySweets.Project.Controllers;
 using System.Collections.ObjectModel;
 
@@ -19,23 +18,27 @@ public partial class FavoritesPage : ContentPage
         _userController = new UserController();
     }
 
+    //called when the page appears; loads the user's favorites
     protected override void OnAppearing()
     {
         base.OnAppearing();
         LoadFavoriteRecipes();
     }
 
+    //loads the current user's favorite recipes
     private void LoadFavoriteRecipes()
     {
         var currentUser = _userController.GetLoggedInUser();
         if (currentUser == null)
         {
+            //if not logged in, show message
             noFavoritesLabel.Text = "Please sign in to view your favorites.";
             noFavoritesLabel.IsVisible = true;
             favoritesCollection.ItemsSource = null;
             return;
         }
 
+        //retrieve user's favorites
         var userFavorites = _favoriteController
             .GetFavoritesForUser(currentUser.ID)
             .Select(fav => _recipeController.GetRecipeById(fav.RecipeId))
@@ -49,6 +52,7 @@ public partial class FavoritesPage : ContentPage
         noFavoritesLabel.IsVisible = _favorites.Count == 0;
     }
 
+    //handles when a favorite recipe is selected from the list
     private void OnFavoriteSelected(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is RecipeDisplayView selected)
@@ -62,6 +66,7 @@ public partial class FavoritesPage : ContentPage
         }
     }
 
+    //handles when the favorite icon is clicked to toggle favorite status
     private void OnToggleFavoriteClicked(object sender, EventArgs e)
     {
         var button = (ImageButton)sender;
@@ -74,6 +79,7 @@ public partial class FavoritesPage : ContentPage
             return;
         }
 
+        //toggle favorite status
         if (_favoriteController.IsFavorited(user.ID, recipeId))
         {
             _favoriteController.RemoveFavorite(user.ID, recipeId);
@@ -83,6 +89,6 @@ public partial class FavoritesPage : ContentPage
             _favoriteController.AddFavorite(user.ID, recipeId);
         }
 
-        LoadFavoriteRecipes(); // Refresh the list
+        LoadFavoriteRecipes(); //refresh the list
     }
 }
