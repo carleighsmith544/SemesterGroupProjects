@@ -1,8 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using SavorySweets.Project.Models;
 
@@ -10,7 +5,7 @@ namespace SavorySweets.Project.Data
 {
     public class UserDataService
     {
-        private readonly string dbPath;
+        private readonly string dbPath; //path to the SQLite database
 
         public UserDataService()
         {
@@ -18,6 +13,7 @@ namespace SavorySweets.Project.Data
             InitializeDatabase();
         }
 
+        //creates the Users table if it doesn't already exist
         private void InitializeDatabase()
         {
             using var connection = new SqliteConnection($"Data Source={dbPath}");
@@ -39,6 +35,7 @@ namespace SavorySweets.Project.Data
             command.ExecuteNonQuery();
         }
 
+        //registers a new user by inserting into the Users table
         public bool Register(User user)
         {
             using var connection = new SqliteConnection($"Data Source={dbPath}");
@@ -68,6 +65,7 @@ namespace SavorySweets.Project.Data
             }
         }
 
+        //attempts to login a user based on email and password
         public User? Login(string email, string password)
         {
             using var connection = new SqliteConnection($"Data Source={dbPath}");
@@ -99,7 +97,7 @@ namespace SavorySweets.Project.Data
             return null;
         }
 
-        // ✅ NEW: Get all users (for persistent login support)
+        // get all users
         public List<User> GetAllUsers()
         {
             var users = new List<User>();
@@ -128,6 +126,7 @@ namespace SavorySweets.Project.Data
             return users;
         }
 
+        //updates an existing user's information in the database
         public void UpdateUser(User user)
         {
             using var connection = new SqliteConnection($"Data Source={dbPath}");
