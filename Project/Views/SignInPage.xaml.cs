@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +9,15 @@ namespace SavorySweets.Project.Views
 {
     public partial class SignInPage : ContentPage
     {
-        private readonly UserController _userController;
+        private readonly UserController _userController; 
 
         public SignInPage()
         {
             InitializeComponent();
             _userController = new UserController();
         }
+
+        // Handles the Sign In button click
         private void OnSignInClicked(object sender, EventArgs e)
         {
             string email = emailEntry.Text?.Trim() ?? "";
@@ -33,21 +35,20 @@ namespace SavorySweets.Project.Views
             {
                 errorLabel.IsVisible = false;
 
-                // Navigate to Main Page or Home Page
-                Application.Current.MainPage = new NavigationPage(new HomePage()); // Replace with your actual home page
+                Application.Current.MainPage = new NavigationPage(new HomePage());
             }
             else
             {
+                // If login fails, show an error message
                 errorLabel.Text = "Login failed. Please check your credentials.";
                 errorLabel.IsVisible = true;
             }
         }
 
+        // Handles the Sign Up link/button click
         private void OnSignUpClicked(object sender, EventArgs e)
         {
-            // Navigate to Sign Up page
             Navigation.PushAsync(new SignUpPage());
         }
     }
 }
-
