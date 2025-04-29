@@ -1,4 +1,4 @@
-﻿using SavorySweets.Project.Models;
+using SavorySweets.Project.Models;
 using SavorySweets.Project.Controllers;
 using System.Collections.ObjectModel;
 
@@ -6,10 +6,10 @@ namespace SavorySweets.Project.Views;
 
 public partial class RecipeDetailPage : ContentPage
 {
-    private readonly Recipe _recipe;
-    private readonly RecipeController _recipeController;
-    private readonly FavoriteController _favoriteController = new();
-    private readonly UserController _userController = new();
+    private readonly Recipe _recipe;                     
+    private readonly RecipeController _recipeController;  
+    private readonly FavoriteController _favoriteController = new(); 
+    private readonly UserController _userController = new();          
 
     public RecipeDetailPage(Recipe recipe, RecipeController controller)
     {
@@ -28,22 +28,24 @@ public partial class RecipeDetailPage : ContentPage
             ? "default_recipe.png"
             : _recipe.Imagepath;
 
-        SetFavoriteIcon();
+        SetFavoriteIcon(); // Set the favorite icon based on status
     }
 
+    // Sets the favorite button icon based on whether the recipe is favorited
     private void SetFavoriteIcon()
     {
         var user = _userController.GetLoggedInUser();
         if (user != null && _favoriteController.IsFavorited(user.ID, _recipe.Id))
         {
-            favoriteButton.Source = "star_filled.png";
+            favoriteButton.Source = "star_filled.png"; 
         }
         else
         {
-            favoriteButton.Source = "star_outline.png";
+            favoriteButton.Source = "star_outline.png"; 
         }
     }
 
+    // Handles favorite button click to add or remove recipe from favorites
     private void OnFavoriteClicked(object sender, EventArgs e)
     {
         var user = _userController.GetLoggedInUser();
@@ -53,6 +55,7 @@ public partial class RecipeDetailPage : ContentPage
             return;
         }
 
+        // Toggle favorite status
         if (_favoriteController.IsFavorited(user.ID, _recipe.Id))
         {
             _favoriteController.RemoveFavorite(user.ID, _recipe.Id);
@@ -62,6 +65,6 @@ public partial class RecipeDetailPage : ContentPage
             _favoriteController.AddFavorite(user.ID, _recipe.Id);
         }
 
-        SetFavoriteIcon();
+        SetFavoriteIcon(); 
     }
 }
