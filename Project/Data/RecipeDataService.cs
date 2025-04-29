@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using SavorySweets.Project.Models;
 
 namespace SavorySweets.Project.Data
 {
     public class RecipeDataService
     {
-        private readonly string filePath;
+        private readonly string filePath; //file path to store the recipes JSON file
 
         public RecipeDataService()
         {
@@ -20,6 +15,7 @@ namespace SavorySweets.Project.Data
 
         public ObservableCollection<Recipe> LoadRecipes()
         {
+            //check if the recipes file exists
             if (File.Exists(filePath))
             {
                 string json = File.ReadAllText(filePath);
@@ -30,6 +26,7 @@ namespace SavorySweets.Project.Data
             return new ObservableCollection<Recipe>();
         }
 
+        //saves ObservableCollection of recipes to the JSON file
         public void SaveRecipes(ObservableCollection<Recipe> recipes)
         {
             string json = JsonSerializer.Serialize(recipes.ToList(), new JsonSerializerOptions { WriteIndented = true });
