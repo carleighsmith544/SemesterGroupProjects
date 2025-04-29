@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SavorySweets.Project.Views.HomePage"
+             Title="Home">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="0" Spacing="20">
+
+            <!-- HEADER SECTION -->
+            <Grid Padding="15"
+                BackgroundColor="#f8bbd0"
+                ColumnDefinitions="Auto,*,Auto"
+                RowDefinitions="Auto,Auto"
+                RowSpacing="10">
+
+               <!-- App Title -->
+               <Label Grid.Row="0" Grid.Column="0"
+                    Text="Savory Sweets"
+                    FontFamily="Cursive"
+                    FontSize="26"
+                    TextColor="#d81b60"
+                    VerticalOptions="Center" />
+
+                <!-- Navigation Buttons (centered) -->
+                <HorizontalStackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" Spacing="12">
+                    <Button Text="All Recipes"
+                        Clicked="OnViewRecipesClicked"
+                        FontSize="13"
+                        BackgroundColor="White"
+                        TextColor="#d81b60"
+                        CornerRadius="10" />
+                    <Button Text="Favorites"
+                        Clicked="OnViewFavoritesClicked"
+                        FontSize="13"
+                        BackgroundColor="White"
+                        TextColor="#d81b60"
+                        CornerRadius="10" />
+                    <Button Text="My Recipes"
+                        Clicked="OnMyRecipesClicked"
+                        FontSize="13"
+                        BackgroundColor="White"
+                        TextColor="#d81b60"
+                        CornerRadius="10" />
+                </HorizontalStackLayout>
+
+                <!-- Sign In / Up Buttons -->
+                <StackLayout Orientation="Horizontal"
+             Grid.Row="0" Grid.Column="2"
+             HorizontalOptions="End"
+             Spacing="10">
+
+                    <Button x:Name="SignInButton"
+            Text="Sign In"
+            Clicked="OnSignInClicked"
+            FontSize="13"
+            BackgroundColor="#f48fb1"
+            TextColor="White"
+            CornerRadius="10" />
+
+                    <Button x:Name="SignUpButton"
+            Text="Sign Up"
+            Clicked="OnSignUpClicked"
+            FontSize="13"
+            BackgroundColor="#ec407a"
+            TextColor="White"
+            CornerRadius="10" />
+
+                    <Button x:Name="LogoutButton"
+            Text="Logout"
+            Clicked="OnLogoutClicked"
+            FontSize="13"
+            BackgroundColor="#c62828"
+            TextColor="White"
+            CornerRadius="10"
+            IsVisible="False" />
+
+
+                    <ImageButton x:Name="SettingsButton"
+             Source="gear_icon.png"
+             Clicked="OnSettingsClicked"
+             BackgroundColor="Transparent"
+             HeightRequest="30"
+             WidthRequest="30" />
+                </StackLayout>
+
+
+            </Grid>
+
+
+            <!-- Slogan -->
+            <Frame BackgroundColor="#f06292"
+                   CornerRadius="20"
+                   Padding="10"
+                   Margin="20,0"
+                   HasShadow="False">
+                <Label Text="Savor the Sweet Life, One Recipe at a Time"
+                       HorizontalOptions="Center"
+                       TextColor="White"
+                       FontAttributes="Italic"
+                       FontSize="18" />
+            </Frame>
+
+            <!-- Four Category Cards Side-by-Side -->
+            <!-- IMAGE CATEGORIES -->
+            <FlexLayout Wrap="Wrap"
+            JustifyContent="Center"
+            AlignItems="Start"
+            Direction="Row"
+            Padding="20"
+            AlignContent="Start"
+            BindableLayout.ItemsSource="{Binding ImageCategories}">
+
+
+
+
+                <!-- Manually define each card below -->
+
+                <VerticalStackLayout WidthRequest="180" Margin="10">
+                    <ImageButton Source="popular.png"
+                     HeightRequest="250"
+                     Aspect="AspectFit"
+                     Clicked="OnPopularClicked"
+                     BackgroundColor="Transparent" />
+                    <Label Text="Most Popular"
+               FontSize="14"
+               HorizontalOptions="Center"
+               Margin="0,5,0,0"
+               TextColor="#ec407a" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout WidthRequest="180" Margin="10">
+                    <ImageButton Source="sugarfree.png"
+                     HeightRequest="250"
+                     Aspect="AspectFit"
+                     Clicked="OnGlutenFreeClicked"
+                     BackgroundColor="Transparent" />
+                    <Label Text="Gluten-Free"
+               FontSize="14"
+               HorizontalOptions="Center"
+               Margin="0,5,0,0"
+               TextColor="#ec407a" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout WidthRequest="180" Margin="10">
+                    <ImageButton Source="fiveminute.png"
+                     HeightRequest="250"
+                     Aspect="AspectFit"
+                     Clicked="OnFiveMinuteClicked"
+                     BackgroundColor="Transparent" />
+                    <Label Text="5-Minute Recipes"
+               FontSize="14"
+               HorizontalOptions="Center"
+               Margin="0,5,0,0"
+               TextColor="#ec407a" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout WidthRequest="180" Margin="10">
+                    <ImageButton Source="simple.png"
+                     HeightRequest="250"
+                     Aspect="AspectFit"
+                     Clicked="OnBeginnerClicked"
+                     BackgroundColor="Transparent" />
+                    <Label Text="Beginner Recipes"
+               FontSize="14"
+               HorizontalOptions="Center"
+               Margin="0,5,0,0"
+               TextColor="#ec407a" />
+                </VerticalStackLayout>
+
+            </FlexLayout>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

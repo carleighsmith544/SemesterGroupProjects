@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SavorySweets.Project.Views.RecipeDetailPage"
+             Title="Recipe Details">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Title and Favorite Button -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Label x:Name="titleLabel"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#d81b60" />
+                <ImageButton x:Name="favoriteButton"
+                             Source="heart_outline.png"
+                             HeightRequest="30"
+                             WidthRequest="30"
+                             Clicked="OnFavoriteClicked"
+                             BackgroundColor="Transparent" />
+            </HorizontalStackLayout>
+
+            <!-- Full Image -->
+            <Frame CornerRadius="20"
+                   Padding="0"
+                   HasShadow="True"
+                   BackgroundColor="Transparent">
+                <Image x:Name="recipeImage"
+                       Aspect="AspectFit"
+                       HeightRequest="500"
+                       WidthRequest="250"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,10" />
+            </Frame>
+
+            <!-- Description -->
+            <Frame BackgroundColor="#fce4ec" CornerRadius="12" Padding="15">
+                <Label x:Name="descriptionLabel"
+                       FontSize="16"
+                       TextColor="Black" />
+            </Frame>
+
+            <!-- Ingredients -->
+            <Frame BackgroundColor="#fce4ec" CornerRadius="12" Padding="15">
+                <VerticalStackLayout>
+                    <Label Text="Ingredients"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           TextColor="Black" />
+                    <Label x:Name="ingredientsLabel"
+                           FontSize="16"
+                           TextColor="Black" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Instructions -->
+            <Frame BackgroundColor="#fce4ec" CornerRadius="12" Padding="15">
+                <VerticalStackLayout>
+                    <Label Text="Instructions"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           TextColor="Black" />
+                    <Label x:Name="instructionsLabel"
+                           FontSize="16"
+                           TextColor="Black" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Prep Time & Category -->
+            <Frame BackgroundColor="#fce4ec" CornerRadius="12" Padding="15">
+                <VerticalStackLayout>
+                    <Label Text="Details"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           TextColor="Black" />
+                    <Label x:Name="prepTimeLabel"
+                           FontSize="14"
+                           TextColor="Black" />
+                    <Label x:Name="categoryLabel"
+                           FontSize="14"
+                           TextColor="Black" />
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

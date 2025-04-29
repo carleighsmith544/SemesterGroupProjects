@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SavorySweets.Project.Views.AddOrEditRecipePage"
+             Title="Add Recipe">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20">
+
+            <!-- Header -->
+            <Frame BackgroundColor="#f8bbd0"
+                   CornerRadius="20"
+                   HasShadow="False">
+                <Label Text="Recipe Details"
+                       FontSize="26"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#d81b60"
+                       Padding="10" />
+            </Frame>
+
+            <!-- Title -->
+            <Frame BackgroundColor="#fce4ec" CornerRadius="12" HasShadow="False" Padding="0">
+                <Entry x:Name="titleEntry"
+                       Placeholder="Recipe Title"
+                       BackgroundColor="Transparent"
+                       TextColor="Black"
+                       Margin="10,0" />
+            </Frame>
+
+            <!-- Description -->
+            <Frame BackgroundColor="#fce4ec" CornerRadius="12" HasShadow="False" Padding="0">
+                <Editor x:Name="descriptionEditor"
+                        Placeholder="Short Description"
+                        BackgroundColor="Transparent"
+                        TextColor="Black"
+                        AutoSize="TextChanges"
+                        Margin="10,0" />
+            </Frame>
+
+            <!-- Ingredients -->
+            <Frame BackgroundColor="#fce4ec" CornerRadius="12" HasShadow="False" Padding="0">
+                <Editor x:Name="ingredientsEditor"
+                        Placeholder="Ingredients"
+                        BackgroundColor="Transparent"
+                        TextColor="Black"
+                        AutoSize="TextChanges"
+                        Margin="10,0" />
+            </Frame>
+
+            <!-- Instructions -->
+            <Frame BackgroundColor="#fce4ec" CornerRadius="12" HasShadow="False" Padding="0">
+                <Editor x:Name="instructionsEditor"
+                        Placeholder="Instructions"
+                        BackgroundColor="Transparent"
+                        TextColor="Black"
+                        AutoSize="TextChanges"
+                        Margin="10,0" />
+            </Frame>
+
+            <!-- Prep Time -->
+            <Frame BackgroundColor="#fce4ec" CornerRadius="12" HasShadow="False" Padding="0">
+                <Entry x:Name="prepTimeEntry"
+                       Placeholder="Prep Time (minutes)"
+                       Keyboard="Numeric"
+                       BackgroundColor="Transparent"
+                       TextColor="Black"
+                       Margin="10,0" />
+            </Frame>
+
+            <!-- Category Picker -->
+            <Frame BackgroundColor="#fce4ec" CornerRadius="12" HasShadow="False" Padding="0">
+                <Picker x:Name="categoryPicker"
+                        Title="Select Category"
+                        TitleColor="Gray"
+                        BackgroundColor="Transparent"
+                        TextColor="Black"
+                        Margin="10,0">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Popular</x:String>
+                            <x:String>Gluten-Free</x:String>
+                            <x:String>5-Minute</x:String>
+                            <x:String>Beginner</x:String>
+                            <x:String>No Category</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Frame>
+
+            <!-- Recipe Image -->
+            <Image x:Name="recipeImage"
+                   HeightRequest="200"
+                   Aspect="AspectFill"
+                   BackgroundColor="#fce4ec"
+                   Margin="0,10"
+                   HorizontalOptions="Center" />
+
+            <!-- Choose Image Button -->
+            <Button Text="Choose Image"
+                    Clicked="OnChooseImageClicked"
+                    BackgroundColor="#f48fb1"
+                    TextColor="White"
+                    CornerRadius="15"
+                    WidthRequest="200"
+                    HorizontalOptions="Center" />
+
+            <!-- Save Button -->
+            <Frame CornerRadius="10" Padding="0" HasShadow="False" BackgroundColor="Transparent">
+                <Button Text="Save Recipe"
+                        Clicked="OnSaveClicked"
+                        BackgroundColor="#ec407a"
+                        TextColor="White"
+                        HeightRequest="50"
+                        FontSize="16"
+                        CornerRadius="20" />
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

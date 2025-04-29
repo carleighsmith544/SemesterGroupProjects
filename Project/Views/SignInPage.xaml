@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SavorySweets.Project.Views.SignInPage"
+             Title="Sign In">
+
+	<ScrollView>
+		<VerticalStackLayout Padding="30" Spacing="20">
+
+			<!-- Header -->
+			<Frame BackgroundColor="#f8bbd0"
+                   CornerRadius="20"
+                   HasShadow="False">
+				<Label Text="Welcome to Savory Sweets!"
+                       FontSize="26"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#d81b60"
+                       Padding="10" />
+			</Frame>
+
+			<!-- Email -->
+			<Frame BackgroundColor="#fce4ec" CornerRadius="12" HasShadow="False" Padding="0">
+				<Entry x:Name="emailEntry"
+                       Placeholder="Email"
+                       Keyboard="Email"
+                       BackgroundColor="Transparent"
+                       TextColor="Black"
+                       PlaceholderColor="Gray"
+                       Margin="10,0" />
+			</Frame>
+
+			<!-- Password -->
+			<Frame BackgroundColor="#fce4ec" CornerRadius="12" HasShadow="False" Padding="0">
+				<Entry x:Name="passwordEntry"
+                       Placeholder="Password"
+                       IsPassword="True"
+                       BackgroundColor="Transparent"
+                       TextColor="Black"
+                       PlaceholderColor="Gray"
+                       Margin="10,0" />
+			</Frame>
+
+			<!-- Error Message -->
+			<Label x:Name="errorLabel"
+                   TextColor="Red"
+                   IsVisible="False"
+                   HorizontalOptions="Center" />
+
+			<!-- Sign In Button -->
+			<Border StrokeShape="RoundRectangle 20"
+                    BackgroundColor="#ec407a"
+                    WidthRequest="220"
+                    HorizontalOptions="Center">
+				<Button Text="Sign In"
+                        Clicked="OnSignInClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        FontSize="16" />
+			</Border>
+
+			<!-- Link to Sign Up -->
+			<Button Text="Don't have an account? Sign Up"
+                    Clicked="OnSignUpClicked"
+                    FontAttributes="Italic"
+                    BackgroundColor="Transparent"
+                    TextColor="#d81b60"
+                    FontSize="14"
+                    HorizontalOptions="Center" />
+
+		</VerticalStackLayout>
+	</ScrollView>
+
+</ContentPage>

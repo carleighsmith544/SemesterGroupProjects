@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SavorySweets.Project.Views.SettingsPage"
+             Title="Settings">
+
+	<ScrollView>
+		<VerticalStackLayout Padding="30" Spacing="20">
+
+			<Frame BackgroundColor="#f8bbd0"
+                   CornerRadius="20"
+                   HasShadow="False">
+				<Label Text="Profile Settings"
+                       FontSize="26"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#d81b60"
+                       Padding="10" />
+			</Frame>
+
+			<Frame BackgroundColor="#fce4ec"
+                   CornerRadius="75"
+                   WidthRequest="150"
+                   HeightRequest="150"
+                   Padding="0"
+                   HorizontalOptions="Center"
+                   HasShadow="False">
+				<Image x:Name="profileImage"
+                       WidthRequest="150"
+                       HeightRequest="150"
+                       Aspect="AspectFill"
+                       BackgroundColor="Transparent" />
+			</Frame>
+
+			<Button Text="Change Profile Picture"
+                    Clicked="OnChangePhotoClicked"
+                    FontSize="14"
+                    BackgroundColor="#f48fb1"
+                    TextColor="White"
+                    CornerRadius="12"
+                    WidthRequest="220"
+                    HorizontalOptions="Center" />
+
+			<Frame BackgroundColor="#fce4ec" CornerRadius="12" HasShadow="False" Padding="0">
+				<Entry x:Name="firstNameEntry"
+                       Placeholder="First Name"
+                       BackgroundColor="Transparent"
+                       TextColor="Black"
+                       Margin="10,0" />
+			</Frame>
+
+			<Frame BackgroundColor="#fce4ec" CornerRadius="12" HasShadow="False" Padding="0">
+				<Entry x:Name="lastNameEntry"
+                       Placeholder="Last Name"
+                       BackgroundColor="Transparent"
+                       TextColor="Black"
+                       Margin="10,0" />
+			</Frame>
+
+			<Frame BackgroundColor="#fce4ec" CornerRadius="12" HasShadow="False" Padding="0">
+				<Entry x:Name="emailEntry"
+                       Placeholder="Email"
+                       Keyboard="Email"
+                       BackgroundColor="Transparent"
+                       TextColor="Black"
+                       Margin="10,0" />
+			</Frame>
+
+			<HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+				<Label Text="Dark Mode"
+                       VerticalOptions="Center"
+                       TextColor="#ec407a"
+                       FontSize="16" />
+				<Switch x:Name="darkModeSwitch" />
+			</HorizontalStackLayout>
+
+			<Border StrokeShape="RoundRectangle 20"
+                    BackgroundColor="#ec407a"
+                    WidthRequest="220"
+                    HorizontalOptions="Center">
+				<Button Text="Save Settings"
+                        Clicked="OnSaveSettingsClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        FontSize="16" />
+			</Border>
+
+		</VerticalStackLayout>
+	</ScrollView>
+
+</ContentPage>
