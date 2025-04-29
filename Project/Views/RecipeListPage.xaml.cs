@@ -1,16 +1,14 @@
-﻿using SavorySweets.Project.Models;
 using SavorySweets.Project.Controllers;
 using System.Collections.ObjectModel;
-using SavorySweets.Project.Views;
 
 namespace SavorySweets.Project.Views;
 
 public partial class RecipeListPage : ContentPage
 {
-    private readonly RecipeController _recipeController;
+    private readonly RecipeController _recipeController;     
     private readonly FavoriteController _favoriteController;
-    private readonly UserController _userController;
-    private ObservableCollection<RecipeDisplayView> _recipes;
+    private readonly UserController _userController;         
+    private ObservableCollection<RecipeDisplayView> _recipes; 
 
     public RecipeListPage()
     {
@@ -21,6 +19,7 @@ public partial class RecipeListPage : ContentPage
         LoadRecipes();
     }
 
+    // Loads all recipes and updates their favorite status for the logged-in user
     private void LoadRecipes()
     {
         var user = _userController.GetLoggedInUser();
@@ -41,6 +40,7 @@ public partial class RecipeListPage : ContentPage
         recipeCollectionView.ItemsSource = _recipes;
     }
 
+    // Handles when a recipe is tapped (selected) and navigates to the detail page
     private void OnRecipeTapped(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is RecipeDisplayView selectedView)
@@ -51,10 +51,11 @@ public partial class RecipeListPage : ContentPage
                 Navigation.PushAsync(new RecipeDetailPage(recipe, _recipeController));
             }
 
-            ((CollectionView)sender).SelectedItem = null;
+            ((CollectionView)sender).SelectedItem = null; 
         }
     }
 
+    // Handles when the favorite button is clicked to toggle favorite status
     private void OnFavoriteClicked(object sender, EventArgs e)
     {
         if (sender is ImageButton button && button.CommandParameter is int recipeId)
@@ -75,7 +76,6 @@ public partial class RecipeListPage : ContentPage
                 _favoriteController.AddFavorite(user.ID, recipeId);
             }
 
-            LoadRecipes(); // Refresh list with updated stars
-        }
+            LoadRecipes(); 
     }
 }
