@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace SavorySweets.Project.Controllers
 {
     public class ThemeController
     {
-        public bool IsDarkMode { get; private set; }
+        public bool IsDarkMode { get; private set; }    //property to track if dark mode is enabled
+
 
         public ThemeController()
         {
-            IsDarkMode = false; // default
+            IsDarkMode = false; //default to light mode
         }
 
+        //method to toggle between dark mode and light mode
         public void ToggleTheme()
         {
-            IsDarkMode = !IsDarkMode;
+            IsDarkMode = !IsDarkMode;  //switch the current theme
 
-            // Optional: Apply platform-specific theme here
-            // App.Current.UserAppTheme = IsDarkMode ? AppTheme.Dark : AppTheme.Light;
         }
     }
 }
