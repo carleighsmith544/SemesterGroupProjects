@@ -1,8 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SavorySweets.Project.Models;
 using SavorySweets.Project.Controllers;
 
@@ -10,7 +5,7 @@ namespace SavorySweets.Project.Views
 {
     public partial class SignUpPage : ContentPage
     {
-        private readonly UserController _userController;
+        private readonly UserController _userController; 
 
         public SignUpPage()
         {
@@ -18,6 +13,7 @@ namespace SavorySweets.Project.Views
             _userController = new UserController();
         }
 
+        // Handles the Create Account button click
         private void OnCreateAccountClicked(object sender, EventArgs e)
         {
             string firstName = firstNameEntry.Text?.Trim() ?? "";
@@ -35,6 +31,7 @@ namespace SavorySweets.Project.Views
                 return;
             }
 
+            // Create a new User object with provided input
             var newUser = new User
             {
                 FirstName = firstName,
@@ -48,7 +45,7 @@ namespace SavorySweets.Project.Views
             {
                 errorLabel.IsVisible = false;
                 DisplayAlert("Success", "Account created!", "OK");
-                Navigation.PopAsync(); // Go back to Sign In page
+                Navigation.PopAsync(); // Navigate back to Sign In page
             }
             else
             {
@@ -57,10 +54,10 @@ namespace SavorySweets.Project.Views
             }
         }
 
+        // Handles the "Already have an account?" link/button
         private void OnSignInClicked(object sender, EventArgs e)
         {
-            Navigation.PopAsync(); // Go back to Sign In page
+            Navigation.PopAsync(); 
         }
     }
 }
-
